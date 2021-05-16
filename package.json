@@ -1,0 +1,24 @@
+{
+  "name": "your-loader-and-plugin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js",
+    "serve": "npx webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodrick278/your-loader-and-plugin.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rodrick278/your-loader-and-plugin/issues"
+  },
+  "homepage": "https://github.com/rodrick278/your-loader-and-plugin#readme",
+  "devDependencies": {
+    "webpack": "^5.37.0"
+  }
+}
