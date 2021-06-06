@@ -1,37 +1,35 @@
 const path = require('path')
-const OutLogPlugin = require('./plugins/OutLogPlugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
-  entry: './src/index.js',
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, './dist'),
-  },
-  target: 'web',
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        use: [
-          'console-loader',
-          {
-            loader: 'company-loader',
-            options: {
-              sign: 'we-doctor@2021',
+    entry: './src/index.js',
+    /** 多入口 */
+    // entry:{
+    //   index:'./src/index.js',
+    //   test:'./src/test.js'
+    // },
+    output: {
+        filename: '[name].[hash:8].js',
+        path: path.resolve(__dirname, './dist'),
+    },
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+            cacheGroups: {
+                react: {
+                    name: 'react',
+                    test: /[\\/]node_modules[\\/](react)/,
+                    chunks: 'all',
+                    priority: -5,
+                    reuseExistingChunk: true,
+                },
             },
-          },
-        ],
-      },
-    ],
-  },
-  plugins: [
-    new OutLogPlugin({outFileName:"buildInfo"})
-  ],
-  resolveLoader: {
-    // 去哪些目录下寻找 Loader，有先后顺序之分 node_modules 如果没有就去./loaders目录下
-    modules: ['node_modules', './loaders/'],
-  },
-  // 打包模式，开发||生产
-  mode: 'development',
-  devtool: 'cheap-source-map'
+        },
+    },
+    target: 'web',
+    plugins: [new HtmlWebpackPlugin(), new CleanWebpackPlugin()],
+    // 打包模式，开发||生产
+    mode: 'development',
+    // devtool: 'cheap-source-map'
 }
