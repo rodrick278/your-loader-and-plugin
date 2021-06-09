@@ -1,12 +1,5 @@
-import $ from 'jquery'
-import React from 'react'
-
-console.log(React);
-
-console.log($)
-
 function mul(a, b) {
-    return a * b
+  return a * b;
 }
-
-export { mul }
+console.log('test 被加载了');
+export { mul };
